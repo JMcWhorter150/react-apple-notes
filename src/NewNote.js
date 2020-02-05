@@ -1,8 +1,8 @@
 import React from 'react';
 
-function NewNote() {
+function NewNote({handleClick}) {
     return(
-        <button>New Note</button>
+        <button onClick={handleClick}>New Note</button>
     );
 }
 

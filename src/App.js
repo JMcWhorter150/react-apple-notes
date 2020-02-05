@@ -12,6 +12,7 @@ class App extends React.Component {
       searchText: "",
       currentNoteId: "",
       currentCopy: "",
+      currentTitle: "",
       notes: [
         {
           id: 'a1b2c3',
@@ -36,11 +37,11 @@ class App extends React.Component {
   render() {
     return (
       <div className="App App-header">
-        <NewNote />
+        <NewNote handleClick={this._createNewNote}/>
         <SearchBar text={this.searchText} handleText={this._setSearchText} />
         <NoteList notes={this._getFilteredNotes(this.notes)} selectNote={this._selectNote} />
         {this.state.currentNoteId ?
-        <NoteEditor updateNote={this._updateNote} copy={this.state.currentCopy} updateCopy={this._updateCopyText} note={this.state.notes.find(this._grabNote)} />
+        <NoteEditor updateNote={this._updateNote} copy={this.state.currentCopy} title={this.state.currentTitle} updateTitle={this._updateTitle} updateCopy={this._updateCopyText} note={this.state.notes.find(this._grabNote)} />
         :
         ""
         }
@@ -65,14 +66,14 @@ class App extends React.Component {
     });
   }
 
-  // Should you put this on the listnote component or the list item itself?
   _selectNote = (currentNoteId) => {
     this.setState({
       currentNoteId
     }, () => {
       const note = this.state.notes.find(this._grabNote);
       this.setState({
-        currentCopy: note.copy
+        currentCopy: note.copy,
+        currentTitle: note.title
       })
     })
   }
@@ -80,11 +81,7 @@ class App extends React.Component {
   _updateNote = (newNote) => {
     let notePosition = this.state.notes.findIndex(this._grabNote);
     let newNotes = [...this.state.notes];
-    console.log(newNote)
-    console.log(newNotes);
-    console.log(notePosition);
     newNotes.splice(notePosition, 1, newNote);
-    console.log(newNotes);
     this.setState({
       notes: newNotes,
       currentNoteId: ""
@@ -95,6 +92,26 @@ class App extends React.Component {
     this.setState({
       currentCopy: newText
     })
+  }
+
+  _updateTitle = (newText) => {
+    this.setState({
+      currentTitle: newText
+    })
+  }
+
+  _createNewNote = () => {
+    const randomId = Math.random().toString(36).slice(2);
+    const note = {
+      id: randomId,
+      title: 'New Title',
+      copy: 'Type Text Here'
+    };
+    this.state.notes.push(note);
+    this.setState({
+      currentNoteId: randomId
+    })
+
   }
 
   _grabNote = (note) => {return note.id === this.state.currentNoteId}
