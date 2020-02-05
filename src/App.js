@@ -3,18 +3,13 @@ import './App.css';
 import ListView from './ListView';
 import ListItem from './ListItem';
 
-// need to make a component with a list of notes
-// list needs to be searchable
-// each item in the list should show a text-area form
-// the text in the text box should be saved to the global state as an object
-// when they close out of a note, the note data should be saved into an object
-// when they click on the item, it should display the note
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       listItems: [],
-      listText: {}
+      listText: {},
+      currentText: ""
     }
   }
 
@@ -22,10 +17,31 @@ class App extends React.Component {
   render() {
     return (
       <div className="App App-header">
-        <ListView />
+        <ListView listOfNotes={this.state.listItems} storeText={this._updateListItem} updateText={this._captureText} currentText={this.currentText} />
         <ListItem />
       </div>
     );
+  }
+
+  _updateListItem = (event) => {
+    event.preventDefault();
+    const newListItems = [...this.state.listItems];
+    newListItems.push(this.state.currentText);
+    this.setState({
+      listItems: newListItems,
+      currentText: ""
+    }
+    )
+  }
+
+  _captureText = (event) => {
+    this.setState({
+      currentText: event.target.value
+    });
+  }
+
+  _filterText = () => {
+    
   }
 }
 
