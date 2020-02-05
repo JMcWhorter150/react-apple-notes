@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-
+import ListView from './ListView';
+import ListItem from './ListItem';
 
 // need to make a component with a list of notes
 // list needs to be searchable
@@ -12,7 +13,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      listItems: [],
+      listText: {}
     }
   }
 
@@ -20,6 +22,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="App App-header">
+        <ListView />
+        <ListItem />
       </div>
     );
   }
