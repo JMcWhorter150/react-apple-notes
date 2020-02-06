@@ -11,8 +11,6 @@ class App extends React.Component {
     this.state = {
       searchText: "",
       currentNoteId: "",
-      currentCopy: "",
-      currentTitle: "",
       notes: [
         {
           id: 'a1b2c3',
@@ -41,7 +39,7 @@ class App extends React.Component {
         <SearchBar text={this.searchText} handleText={this._setSearchText} />
         <NoteList notes={this._getFilteredNotes(this.notes)} selectNote={this._selectNote} />
         {this.state.currentNoteId ?
-        <NoteEditor updateNote={this._updateNote} copy={this.state.currentCopy} title={this.state.currentTitle} updateTitle={this._updateTitle} updateCopy={this._updateCopyText} note={this.state.notes.find(this._grabNote)} />
+        <NoteEditor updateNote={this._updateNote} note={this.state.notes.find(this._grabNote)} />
         :
         ""
         }
@@ -88,17 +86,6 @@ class App extends React.Component {
     });
   }
 
-  _updateCopyText = (newText) => {
-    this.setState({
-      currentCopy: newText
-    })
-  }
-
-  _updateTitle = (newText) => {
-    this.setState({
-      currentTitle: newText
-    })
-  }
 
   _createNewNote = () => {
     const randomId = Math.random().toString(36).slice(2);
