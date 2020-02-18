@@ -32,7 +32,7 @@ class NoteEditor extends React.Component {
                 ...state
             }
         }
-        }
+    }
 
     render () {
         // best way to grab props in a class is the following:

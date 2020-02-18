@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import SearchBar from './SearchBar';
@@ -7,42 +9,35 @@ import NewNote from './NewNote';
 import NoteEditor from './NoteEditor';
 import NoteList from './NoteList';
 import Nav from './Nav';
+import notes from './reducers';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchText: "",
-      currentNoteId: "",
-      notes: [
-      ]
-    }
-  }
+const store = createStore(notes);
 
-
-  render() {
+function App () {
     return (
-      <Router >
-        <div className="App App-header">
-        <Nav />
-        <Switch>
-          <Route exact path="/">
-            <NoteList notes={this.state.notes} selectNote={this._selectNote} />
-          </Route>
-          <Route path="/search">
-            <SearchBar text={this.searchText} handleText={this._setSearchText} />
-            <NoteList notes={this._getFilteredNotes(this.state.notes)} selectNote={this._selectNote} />
-          </Route>
-          <Route path="/create">
-            <NewNote handleClick={this._createNewNote}/>
-            <NoteEditor updateNote={this._updateNote} note={this.state.notes.find(this._grabNote)} />
-          </Route>
-          <Route path="/:id">
-            <NoteEditor updateNote={this._updateNote} note={this.state.notes.find(this._grabNote)} />
-          </Route>  
-        </Switch>
-        </div>
-      </Router>
+      <Provider store={store}>
+        <Router >
+          <div className="App App-header">
+          <Nav />
+          <Switch>
+            <Route exact path="/">
+              <NoteList notes={this.state.notes} selectNote={this._selectNote} />
+            </Route>
+            <Route path="/search">
+              <SearchBar text={this.searchText} handleText={this._setSearchText} />
+              <NoteList notes={this._getFilteredNotes(this.state.notes)} selectNote={this._selectNote} />
+            </Route>
+            <Route path="/create">
+              <NewNote handleClick={this._createNewNote}/>
+              <NoteEditor updateNote={this._updateNote} note={this.state.notes.find(this._grabNote)} />
+            </Route>
+            <Route path="/:id">
+              <NoteEditor updateNote={this._updateNote} note={this.state.notes.find(this._grabNote)} />
+            </Route>  
+          </Switch>
+          </div>
+        </Router>
+      </Provider>
     );
   }
 
@@ -101,5 +96,5 @@ class App extends React.Component {
   }
 
   _grabNote = (note) => {return note.id === this.state.currentNoteId}
-}
+  
 export default App;
