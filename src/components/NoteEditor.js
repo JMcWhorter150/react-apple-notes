@@ -22,9 +22,9 @@ class NoteEditor extends React.Component {
                 <br />
                 <textarea placeholder="Enter Text Here" onChange={(event) => {this._updateLocalNote({...this.state.changedNote, copy: event.target.value})}} value={this.state.changedNote.copy}/>
                 <br />
-
+                <Link to="/search">
                     <input type="submit" value="Submit"></input>
-
+                </Link>
             </form>
     );
     }

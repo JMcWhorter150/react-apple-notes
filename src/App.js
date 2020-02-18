@@ -33,9 +33,7 @@ function App () {
             <Route path="/create">
               <NoteEditor />
             </Route>
-            <Route path="/:id">
-              <NoteEditor />
-            </Route>  
+            <Route path="/:id" component={NoteEditor} />
           </Switch>
           </div>
         </Router>

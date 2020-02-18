@@ -8,7 +8,7 @@ export default function Nav() {
             <br />
             <Link to="/search">Search</Link>
             <br />
-            <Link to="/create">New Note</Link>
+            <Link to="/create">Note</Link>
         </div>
     );
 }
