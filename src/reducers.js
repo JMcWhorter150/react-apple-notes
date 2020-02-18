@@ -15,6 +15,7 @@ export default function notes(state=defaultState, action) {
                 title: "New Title",
                 text: "Type Text Here"
             });
+            newState.currentNote = newState.notes.length - 1;
             break;
         case SELECT_NOTE:
             newState.currentNote = action.payload;

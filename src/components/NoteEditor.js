@@ -5,32 +5,7 @@ class NoteEditor extends React.Component {
         super(props);
 
         this.state = {
-            changedNote: props.note ? props.note : {
-                id: Math.random().toString(36).slice(2),
-                title: 'New Title',
-                copy: 'Type Text Here'
-            }
-        }
-    }
-
-    static getDerivedStateFromProps(props, state) {
-        if (props.note) {
-            if (props.note.id === state.changedNote.id) {
-                return {
-                    ...state
-                }
-            } else {
-                return {
-                    ...state,
-                    changedNote: {
-                        ...props.note
-                    }
-                }
-            }
-        } else {
-            return {
-                ...state
-            }
+            changedNote: props.note
         }
     }
 
@@ -40,7 +15,7 @@ class NoteEditor extends React.Component {
         return(
             <form onSubmit={(event) => {
                 event.preventDefault();
-                updateNote(this.state.changedNote);
+                updateNote(note.id, this.state.changedNote);
             }}>
                 <input onChange={(event) => {this._updateLocalNote({...this.state.changedNote, title: event.target.value})}} placeholder="Enter Title Here" value={this.state.changedNote.title}></input>
                 <br />
