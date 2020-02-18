@@ -4,7 +4,7 @@ import NoteList from '../components/NoteList';
 
 function mapStateToProps(state) {
     return {
-        notes: state.notes
+        notes: state.notes.map(note => note.title.includes(state.searchText) || note.text.includes(state.searchText))
     }
 }
 

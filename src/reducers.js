@@ -1,8 +1,9 @@
-import { CREATE_NOTE, SELECT_NOTE, DEL_NOTE, UPDATE_NOTE } from "./actions";
+import { CREATE_NOTE, SELECT_NOTE, DEL_NOTE, UPDATE_NOTE, FILTER_NOTES } from "./actions";
 
 const defaultState = {
     notes: [],
     currentNote: 0,
+    searchText: ""
 }
 
 export default function notes(state=defaultState, action) {
@@ -25,6 +26,9 @@ export default function notes(state=defaultState, action) {
             break;
         case UPDATE_NOTE:
             newState.notes.splice(action.payload.id, 1, action.payload.noteData);
+            break;
+        case FILTER_NOTES:
+            newState.searchText = action.payload;
             break;
         default:
             break;

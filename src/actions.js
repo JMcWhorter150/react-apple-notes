@@ -2,6 +2,7 @@ export const CREATE_NOTE = 'CREATE_NOTE';
 export const SELECT_NOTE = 'SELECT_NOTE';
 export const DEL_NOTE = 'DEL_NOTE';
 export const UPDATE_NOTE = 'UPDATE_NOTE';
+export const FILTER_NOTES = 'FILTER_NOTES';
 
 export function actionCreateNote() {
     return {
@@ -32,3 +33,11 @@ export function actionUpdateNote(id, noteData) {
         }
     }
 }
+
+export function actionFilterNotes(text) {
+    return {
+        type: FILTER_NOTES,
+        payload: text
+    }
+}
+
