@@ -13,6 +13,8 @@ import notes from './reducers';
 
 const store = createStore(notes);
 
+window.store = store;
+
 function App () {
     return (
       <Provider store={store}>
@@ -21,14 +23,14 @@ function App () {
           <Nav />
           <Switch>
             <Route exact path="/">
-              <NoteList />
+              <NewNote />
+              <h1>Apple Note Editor</h1>
             </Route>
             <Route path="/search">
               <SearchBar />
               <NoteList />
             </Route>
             <Route path="/create">
-              <NewNote />
               <NoteEditor />
             </Route>
             <Route path="/:id">

@@ -1,7 +1,7 @@
 import { CREATE_NOTE, SELECT_NOTE, DEL_NOTE, UPDATE_NOTE, FILTER_NOTES } from "./actions";
 
 const defaultState = {
-    notes: [],
+    notes: [{id: 0, title: "New Title", text: "Type Text Here"}],
     currentNote: 0,
     searchText: ""
 }
