@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 class NoteEditor extends React.Component {
     constructor(props) {
@@ -21,7 +22,9 @@ class NoteEditor extends React.Component {
                 <br />
                 <textarea placeholder="Enter Text Here" onChange={(event) => {this._updateLocalNote({...this.state.changedNote, copy: event.target.value})}} value={this.state.changedNote.copy}/>
                 <br />
-                <input type="submit" value="Submit"></input>
+
+                    <input type="submit" value="Submit"></input>
+
             </form>
     );
     }

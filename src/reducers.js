@@ -12,7 +12,7 @@ export default function notes(state=defaultState, action) {
     switch (action.type) {
         case CREATE_NOTE:
             newState.notes.push({
-                id: newState.notes.length - 1,
+                id: state.notes.length,
                 title: "New Title",
                 text: "Type Text Here"
             });
