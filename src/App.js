@@ -4,11 +4,11 @@ import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import SearchBar from './SearchBar';
-import NewNote from './NewNote';
-import NoteEditor from './NoteEditor';
+import SearchBar from './components/SearchBar';
+import NewNote from './components/NewNote';
+import NoteEditor from './components/NoteEditor';
 import NoteList from './NoteList';
-import Nav from './Nav';
+import Nav from './components/Nav';
 import notes from './reducers';
 
 const store = createStore(notes);
