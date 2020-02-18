@@ -5,28 +5,34 @@ class NoteEditor extends React.Component {
         super(props);
 
         this.state = {
-            changedNote: {}
+            changedNote: props.note ? props.note : {
+                id: Math.random().toString(36).slice(2),
+                title: 'New Title',
+                copy: 'Type Text Here'
+            }
         }
     }
 
     static getDerivedStateFromProps(props, state) {
-        console.log('We are in getDerivedStateFromProps');
-        console.table(props.note);
-        console.table(state.changedNote);
-
-        if (props.note.id === state.changedNote.id) {
-            return {
-                ...state
+        if (props.note) {
+            if (props.note.id === state.changedNote.id) {
+                return {
+                    ...state
+                }
+            } else {
+                return {
+                    ...state,
+                    changedNote: {
+                        ...props.note
+                    }
+                }
             }
         } else {
             return {
-                ...state,
-                changedNote: {
-                    ...props.note
-                }
+                ...state
             }
         }
-    }
+        }
 
     render () {
         // best way to grab props in a class is the following:

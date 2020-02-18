@@ -1,9 +1,12 @@
 import React from 'react';
 import './App.css';
+
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import SearchBar from './SearchBar';
 import NewNote from './NewNote';
 import NoteEditor from './NoteEditor';
 import NoteList from './NoteList';
+import Nav from './Nav';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,21 +15,6 @@ class App extends React.Component {
       searchText: "",
       currentNoteId: "",
       notes: [
-        {
-          id: 'a1b2c3',
-          title: 'first note',
-          copy: 'la la la la'
-        },
-        {
-          id: '44444',
-          title: 'second note',
-          copy: 'ba ba'
-        },
-        {
-          id: 'iiiii',
-          title: 'third note',
-          copy: 'ha ha ha'
-        }
       ]
     }
   }
@@ -34,16 +22,27 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App App-header">
-        <NewNote handleClick={this._createNewNote}/>
-        <SearchBar text={this.searchText} handleText={this._setSearchText} />
-        <NoteList notes={this._getFilteredNotes(this.notes)} selectNote={this._selectNote} />
-        {this.state.currentNoteId ?
-        <NoteEditor updateNote={this._updateNote} note={this.state.notes.find(this._grabNote)} />
-        :
-        ""
-        }
-      </div>
+      <Router >
+        <div className="App App-header">
+        <Nav />
+        <Switch>
+          <Route exact path="/">
+            <NoteList notes={this.state.notes} selectNote={this._selectNote} />
+          </Route>
+          <Route path="/search">
+            <SearchBar text={this.searchText} handleText={this._setSearchText} />
+            <NoteList notes={this._getFilteredNotes(this.state.notes)} selectNote={this._selectNote} />
+          </Route>
+          <Route path="/create">
+            <NewNote handleClick={this._createNewNote}/>
+            <NoteEditor updateNote={this._updateNote} note={this.state.notes.find(this._grabNote)} />
+          </Route>
+          <Route path="/:id">
+            <NoteEditor updateNote={this._updateNote} note={this.state.notes.find(this._grabNote)} />
+          </Route>  
+        </Switch>
+        </div>
+      </Router>
     );
   }
 
