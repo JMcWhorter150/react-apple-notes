@@ -1,8 +1,8 @@
 import React from 'react';
 
-function NoteListItem( {note, selectNote} ) {
+function NoteListItem( {note, selectNote, id} ) {
     return(
-        <li onClick={(event) => selectNote(note.id) }>
+        <li onClick={() => selectNote(id) }>
             {note.title}
         </li>
     );

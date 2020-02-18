@@ -5,9 +5,9 @@ function NoteList({notes, selectNote}) {
     return(
         <ul>
             {
-                notes.map(note => 
+                notes.map((note, i) => 
                     (
-                        <NoteListItem selectNote={selectNote} key={note.id} note={note} />
+                        <NoteListItem selectNote={selectNote} key={i} id={i} note={note} />
                     )
                 )
             }
